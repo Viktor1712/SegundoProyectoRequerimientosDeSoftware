@@ -1,17 +1,37 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Catalogo from "./pages/Catalogo";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Home from "./pages/Home";
+import Catalogo from "./pages/Catalogo";   // 👈 Importa tu Catalogo.js real
 import MascotaDetalle from "./pages/MascotaDetalle";
+
+// ⚠️ Páginas de ejemplo que luego puedes reemplazar:
+function Adoptar() {
+  return (
+    <div className="container mt-5">
+      <h2>Formulario de adopción 🐾</h2>
+    </div>
+  );
+}
+
+function Contacto() {
+  return (
+    <div className="container mt-5">
+      <h2>Contáctanos 📩</h2>
+    </div>
+  );
+}
 
 function App() {
   return (
     <Router>
-      <div className="container mt-4">
-        <h1 className="text-center mb-4">🐾 Refugio de Adopción</h1>
-        <Routes>
-          <Route path="/" element={<Catalogo />} />
-          <Route path="/mascota/:id" element={<MascotaDetalle />} />
-        </Routes>
-      </div>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/catalogo" element={<Catalogo />} />   {/* ✅ Usa tu Catalogo */}
+        <Route path="/adoptar" element={<Adoptar />} />
+        <Route path="/contacto" element={<Contacto />} />
+        <Route path="/mascota/:id" element={<MascotaDetalle />} />
+      </Routes>
     </Router>
   );
 }

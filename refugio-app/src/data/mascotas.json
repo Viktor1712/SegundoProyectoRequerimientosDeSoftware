@@ -6,7 +6,14 @@
     "edad": "2 años",
     "ubicacion": "San José",
     "descripcion": "Cariñosa y juguetona, ideal para familias con niños.",
-    "foto": "https://www.purina.com.ar/sites/default/files/2023-06/como-calcular-la-edad-de-los-perros-1.jpg"
+    "fotoPortada": "https://www.purina.com.ar/sites/default/files/2023-06/como-calcular-la-edad-de-los-perros-1.jpg",
+    "fotosExtras": [
+      "https://placedog.net/400/200?id=1",
+      "https://placedog.net/400/200?id=2"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/48fQIBw3nMg"
+    ]
   },
   {
     "id": 2,
@@ -15,7 +22,14 @@
     "edad": "1 año",
     "ubicacion": "Cartago",
     "descripcion": "Tranquilo y muy limpio, prefiere hogares con pocos animales.",
-    "foto": "https://www.sanicat.com/wp-content/uploads/2022/09/00_blackcats.png"
+    "fotoPortada": "https://www.sanicat.com/wp-content/uploads/2022/09/00_blackcats.png",
+    "fotosExtras": [
+      "https://placekitten.com/400/200",
+      "https://placekitten.com/401/200"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/oa4if1nfN6I"
+    ]
   },
   {
     "id": 3,
@@ -24,6 +38,13 @@
     "edad": "3 años",
     "ubicacion": "Heredia",
     "descripcion": "Activo y leal, necesita espacio para correr.",
-    "foto": "https://placedog.net/400/182?id=35"
+    "fotoPortada": "https://placedog.net/400/182?id=35",
+    "fotosExtras": [
+      "https://placedog.net/400/200?id=36",
+      "https://placedog.net/400/200?id=37"
+    ],
+    "videos": [
+      "https://www.youtube.com/embed/l6_GLPKpNvA"
+    ]
   }
 ]

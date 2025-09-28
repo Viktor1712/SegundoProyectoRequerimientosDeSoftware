@@ -117,9 +117,15 @@ function MascotaDetalle() {
           </div>
         )}
 
-        <Link to="/" className="btn btn-secondary mt-3">
-          Volver
-        </Link>
+        {/* Botones de acción */}
+        <div className="d-flex gap-2 mt-3">
+          <Link to="/" className="btn btn-secondary">
+            Volver
+          </Link>
+          <Link to="/adoptar" className="btn btn-success">
+            ❤️ Adoptar
+          </Link>
+        </div>
       </div>
 
       {/* Modal con navegación */}

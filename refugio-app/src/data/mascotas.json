@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "nombre": "Luna",
+    "especie": "Perro",
+    "edad": "2 años",
+    "ubicacion": "San José",
+    "descripcion": "Cariñosa y juguetona, ideal para familias con niños.",
+    "foto": "https://www.purina.com.ar/sites/default/files/2023-06/como-calcular-la-edad-de-los-perros-1.jpg"
+  },
+  {
+    "id": 2,
+    "nombre": "Milo",
+    "especie": "Gato",
+    "edad": "1 año",
+    "ubicacion": "Cartago",
+    "descripcion": "Tranquilo y muy limpio, prefiere hogares con pocos animales.",
+    "foto": "https://www.sanicat.com/wp-content/uploads/2022/09/00_blackcats.png"
+  },
+  {
+    "id": 3,
+    "nombre": "Rex",
+    "especie": "Perro",
+    "edad": "3 años",
+    "ubicacion": "Heredia",
+    "descripcion": "Activo y leal, necesita espacio para correr.",
+    "foto": "https://placedog.net/400/182?id=35"
+  }
+]

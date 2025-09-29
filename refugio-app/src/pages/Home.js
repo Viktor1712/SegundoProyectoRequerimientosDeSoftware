@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <div className="container text-center mt-5">
-      <h1 className="fw-bold">🐶 Bienvenido al Refugio de Mascotas 🐱</h1>
+      <h1 className="fw-bold">🐶 Bienvenido a MascoTEC 🐱</h1>
       <p className="lead mt-3">
         Aquí encontrarás perritos y gatitos esperando un hogar lleno de amor.  
       </p>

@@ -3,11 +3,12 @@ import { useState } from "react";
 import mascotas from "../data/mascotas.json";
 
 function MascotaDetalle() {
+  const { id } = useParams();
+  const mascota = mascotas.find((m) => m.id === parseInt(id));
+
   const [fotoIndex, setFotoIndex] = useState(0);
   const [mostrarModal, setMostrarModal] = useState(false);
 
-  const { id } = useParams();
-  const mascota = mascotas.find((m) => m.id === parseInt(id));
   if (!mascota) return <p>No se encontró la mascota.</p>;
 
   const fotos = [mascota.fotoPortada, ...(mascota.fotosExtras || [])];
@@ -44,7 +45,7 @@ function MascotaDetalle() {
         <h2>{mascota.nombre}</h2>
         <p>
           <strong>Especie:</strong> {mascota.especie} <br />
-          <strong>Raza:</strong> {mascota.raza || "No especificada"} <br />
+          <strong>Raza:</strong> {mascota.raza} <br />
           <strong>Sexo:</strong> {mascota.sexo} <br />
           <strong>Edad:</strong> {mascota.edad} <br />
           <strong>Tamaño:</strong> {mascota.tamaño} <br />
@@ -54,8 +55,7 @@ function MascotaDetalle() {
           <strong>Condiciones especiales:</strong> {mascota.condicionesEspeciales.join(", ")} <br />
           <strong>Comportamiento:</strong> {mascota.comportamiento.join(", ")} <br />
           <strong>Compatible con niños:</strong> {mascota.compatibilidad.ninos ? "Sí" : "No"} <br />
-          <strong>Compatible con otros perros:</strong> {mascota.compatibilidad.otrosPerros ? "Sí" : "No"} <br />
-          <strong>Compatible con gatos:</strong> {mascota.compatibilidad.gatos ? "Sí" : "No"}
+          <strong>Compatible con otros animales:</strong> {mascota.compatibilidad.otrosAnimales ? "Sí" : "No"}
         </p>
 
         <p style={{ whiteSpace: "pre-line" }}>{mascota.descripcion}</p>
@@ -121,8 +121,12 @@ function MascotaDetalle() {
 
         {/* Botones de acción */}
         <div className="d-flex gap-2 mt-3">
-          <Link to="/" className="btn btn-secondary">Volver</Link>
-          <Link to="/adoptar" className="btn btn-success">❤️ Adoptar</Link>
+          <Link to="/" className="btn btn-secondary">
+            Volver
+          </Link>
+          <Link to="/adoptar" className="btn btn-success">
+            ❤️ Adoptar
+          </Link>
         </div>
       </div>
 

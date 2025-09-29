@@ -7,17 +7,15 @@ function Catalogo() {
   const [filtroRaza, setFiltroRaza] = useState("");
   const [filtroTamaño, setFiltroTamaño] = useState("");
   const [filtroNiños, setFiltroNiños] = useState("");
-  const [filtroOtrosPerros, setFiltroOtrosPerros] = useState("");
-  const [filtroGatos, setFiltroGatos] = useState("");
+  const [filtroOtrosAnimales, setFiltroOtrosAnimales] = useState("");
 
   const mascotasFiltradas = mascotas.filter((m) => {
     return (
       (!filtroEspecie || m.especie === filtroEspecie) &&
-      (!filtroRaza || m.raza?.toLowerCase().includes(filtroRaza.toLowerCase())) &&
+      (!filtroRaza || m.raza.toLowerCase().includes(filtroRaza.toLowerCase())) &&
       (!filtroTamaño || m.tamaño === filtroTamaño) &&
       (!filtroNiños || (filtroNiños === "si" ? m.compatibilidad.ninos : !m.compatibilidad.ninos)) &&
-      (!filtroOtrosPerros || (filtroOtrosPerros === "si" ? m.compatibilidad.otrosPerros : !m.compatibilidad.otrosPerros)) &&
-      (!filtroGatos || (filtroGatos === "si" ? m.compatibilidad.gatos : !m.compatibilidad.gatos))
+      (!filtroOtrosAnimales || (filtroOtrosAnimales === "si" ? m.compatibilidad.otrosAnimales : !m.compatibilidad.otrosAnimales))
     );
   });
 
@@ -32,6 +30,10 @@ function Catalogo() {
             <option value="">Especie</option>
             <option value="Perro">Perro</option>
             <option value="Gato">Gato</option>
+            <option value="Conejo">Conejo</option>
+            <option value="Hurón">Hurón</option>
+            <option value="Pájaro">Pájaro</option>
+            <option value="Cobaya">Cobaya</option>
           </select>
         </div>
         <div className="col-md-2">
@@ -59,15 +61,8 @@ function Catalogo() {
           </select>
         </div>
         <div className="col-md-2">
-          <select className="form-select" value={filtroOtrosPerros} onChange={(e) => setFiltroOtrosPerros(e.target.value)}>
-            <option value="">¿Con otros perros?</option>
-            <option value="si">Sí</option>
-            <option value="no">No</option>
-          </select>
-        </div>
-        <div className="col-md-2">
-          <select className="form-select" value={filtroGatos} onChange={(e) => setFiltroGatos(e.target.value)}>
-            <option value="">¿Con gatos?</option>
+          <select className="form-select" value={filtroOtrosAnimales} onChange={(e) => setFiltroOtrosAnimales(e.target.value)}>
+            <option value="">¿Con otros animales?</option>
             <option value="si">Sí</option>
             <option value="no">No</option>
           </select>
@@ -84,14 +79,16 @@ function Catalogo() {
                 <h5 className="card-title">{m.nombre}</h5>
                 <p className="card-text">
                   <strong>Especie:</strong> {m.especie} <br />
-                  <strong>Raza:</strong> {m.raza || "No especificada"} <br />
+                  <strong>Raza:</strong> {m.raza} <br />
                   <strong>Tamaño:</strong> {m.tamaño} <br />
                   <strong>Ubicación:</strong> {m.ubicacion} <br />
                 </p>
                 <p className="card-text" style={{ maxHeight: "80px", overflow: "hidden", textOverflow: "ellipsis" }}>
                   {m.descripcion}
                 </p>
-                <Link to={`/mascota/${m.id}`} className="btn btn-primary">Ver más</Link>
+                <Link to={`/mascota/${m.id}`} className="btn btn-primary">
+                  Ver más
+                </Link>
               </div>
             </div>
           </div>

@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+import mascotas from "../data/mascotas.json";
 
 function AdoptionForm() {
+  const { id } = useParams();
+  const mascota = mascotas.find((m) => String(m.id) === String(id));
+
   const [formData, setFormData] = useState({
     experience: "",
     space: "",
@@ -26,14 +31,36 @@ function AdoptionForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Datos de adopción:", formData);
-    alert("✅ Tu información de adopción ha sido enviada con éxito.");
+    alert(
+      `✅ Tu solicitud para adoptar a ${mascota?.nombre || "la mascota"} ha sido enviada con éxito.`
+    );
   };
 
   return (
     <Container className="my-5">
       <h2 className="mb-4 text-center">🐾 Información para la Adopción</h2>
+
+      {mascota && (
+        <div className="text-center mb-4">
+          <h4>
+            Estás completando el formulario para adoptar a:{" "}
+            <strong>{mascota.nombre}</strong>
+          </h4>
+          <img
+            src={mascota.fotoPortada}
+            alt={mascota.nombre}
+            style={{
+              maxWidth: "250px",
+              maxHeight: "200px",
+              objectFit: "cover",
+              borderRadius: "10px",
+              marginTop: "10px",
+            }}
+          />
+        </div>
+      )}
+
       <Form onSubmit={handleSubmit}>
-        
         {/* Experiencia previa */}
         <Form.Group className="mb-3">
           <Form.Label>Experiencia previa con mascotas</Form.Label>

@@ -12,10 +12,17 @@ function Catalogo() {
   const mascotasFiltradas = mascotas.filter((m) => {
     return (
       (!filtroEspecie || m.especie === filtroEspecie) &&
-      (!filtroRaza || m.raza.toLowerCase().includes(filtroRaza.toLowerCase())) &&
+      (!filtroRaza ||
+        m.raza.toLowerCase().includes(filtroRaza.toLowerCase())) &&
       (!filtroTamaño || m.tamaño === filtroTamaño) &&
-      (!filtroNiños || (filtroNiños === "si" ? m.compatibilidad.ninos : !m.compatibilidad.ninos)) &&
-      (!filtroOtrosAnimales || (filtroOtrosAnimales === "si" ? m.compatibilidad.otrosAnimales : !m.compatibilidad.otrosAnimales))
+      (!filtroNiños ||
+        (filtroNiños === "si"
+          ? m.compatibilidad.ninos
+          : !m.compatibilidad.ninos)) &&
+      (!filtroOtrosAnimales ||
+        (filtroOtrosAnimales === "si"
+          ? m.compatibilidad.otrosAnimales
+          : !m.compatibilidad.otrosAnimales))
     );
   });
 
@@ -26,7 +33,11 @@ function Catalogo() {
       {/* Filtros */}
       <div className="row mb-4">
         <div className="col-md-2">
-          <select className="form-select" value={filtroEspecie} onChange={(e) => setFiltroEspecie(e.target.value)}>
+          <select
+            className="form-select"
+            value={filtroEspecie}
+            onChange={(e) => setFiltroEspecie(e.target.value)}
+          >
             <option value="">Especie</option>
             <option value="Perro">Perro</option>
             <option value="Gato">Gato</option>
@@ -46,7 +57,11 @@ function Catalogo() {
           />
         </div>
         <div className="col-md-2">
-          <select className="form-select" value={filtroTamaño} onChange={(e) => setFiltroTamaño(e.target.value)}>
+          <select
+            className="form-select"
+            value={filtroTamaño}
+            onChange={(e) => setFiltroTamaño(e.target.value)}
+          >
             <option value="">Tamaño</option>
             <option value="Pequeño">Pequeño</option>
             <option value="Mediano">Mediano</option>
@@ -54,14 +69,22 @@ function Catalogo() {
           </select>
         </div>
         <div className="col-md-2">
-          <select className="form-select" value={filtroNiños} onChange={(e) => setFiltroNiños(e.target.value)}>
+          <select
+            className="form-select"
+            value={filtroNiños}
+            onChange={(e) => setFiltroNiños(e.target.value)}
+          >
             <option value="">¿Con niños?</option>
             <option value="si">Sí</option>
             <option value="no">No</option>
           </select>
         </div>
         <div className="col-md-2">
-          <select className="form-select" value={filtroOtrosAnimales} onChange={(e) => setFiltroOtrosAnimales(e.target.value)}>
+          <select
+            className="form-select"
+            value={filtroOtrosAnimales}
+            onChange={(e) => setFiltroOtrosAnimales(e.target.value)}
+          >
             <option value="">¿Con otros animales?</option>
             <option value="si">Sí</option>
             <option value="no">No</option>
@@ -72,10 +95,17 @@ function Catalogo() {
       {/* Cards */}
       <div className="row">
         {mascotasFiltradas.map((m) => (
-          <div key={m.id} className="col-md-4 mb-3">
-            <div className="card">
-              <img src={m.fotoPortada} className="card-img-top" alt={m.nombre} />
-              <div className="card-body">
+          <div key={m.id} className="col-md-4 mb-3 d-flex">
+            <div className="card w-100 h-100 d-flex flex-column">
+              {/* Imagen más grande */}
+              <img
+                src={m.fotoPortada}
+                className="card-img-top"
+                alt={m.nombre}
+                style={{ height: "400px", objectFit: "cover" }}
+              />
+
+              <div className="card-body d-flex flex-column">
                 <h5 className="card-title">{m.nombre}</h5>
                 <p className="card-text">
                   <strong>Especie:</strong> {m.especie} <br />
@@ -83,17 +113,32 @@ function Catalogo() {
                   <strong>Tamaño:</strong> {m.tamaño} <br />
                   <strong>Ubicación:</strong> {m.ubicacion} <br />
                 </p>
-                <p className="card-text" style={{ maxHeight: "80px", overflow: "hidden", textOverflow: "ellipsis" }}>
+
+                <p
+                  className="card-text"
+                  style={{
+                    maxHeight: "60px",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    flexGrow: 1,
+                  }}
+                >
                   {m.descripcion}
                 </p>
-                <Link to={`/mascota/${m.id}`} className="btn btn-primary">
+
+                <Link
+                  to={`/mascota/${m.id}`}
+                  className="btn btn-primary mt-auto"
+                >
                   Ver más
                 </Link>
               </div>
             </div>
           </div>
         ))}
-        {mascotasFiltradas.length === 0 && <p>No se encontraron mascotas con esos filtros.</p>}
+        {mascotasFiltradas.length === 0 && (
+          <p>No se encontraron mascotas con esos filtros.</p>
+        )}
       </div>
     </div>
   );

@@ -3,20 +3,14 @@ import { useState } from "react";
 import mascotas from "../data/mascotas.json";
 
 function MascotaDetalle() {
-  const { id } = useParams();
-  const mascota = mascotas.find((m) => m.id === parseInt(id));
-
-  // Array con todas las fotos (portada + extras)
-  const fotos = mascota ? [mascota.fotoPortada, ...(mascota.fotosExtras || [])] : [];
-
-  // Estado: foto seleccionada (por índice en el array)
   const [fotoIndex, setFotoIndex] = useState(0);
-
-  // Estado modal
   const [mostrarModal, setMostrarModal] = useState(false);
 
+  const { id } = useParams();
+  const mascota = mascotas.find((m) => m.id === parseInt(id));
   if (!mascota) return <p>No se encontró la mascota.</p>;
 
+  const fotos = [mascota.fotoPortada, ...(mascota.fotosExtras || [])];
   const fotoSeleccionada = fotos[fotoIndex];
 
   const siguienteFoto = (e) => {
@@ -30,7 +24,7 @@ function MascotaDetalle() {
   };
 
   return (
-    <div className="card">
+    <div className="card mb-4">
       {/* Foto principal */}
       <img
         src={fotoSeleccionada}
@@ -50,12 +44,23 @@ function MascotaDetalle() {
         <h2>{mascota.nombre}</h2>
         <p>
           <strong>Especie:</strong> {mascota.especie} <br />
+          <strong>Raza:</strong> {mascota.raza || "No especificada"} <br />
+          <strong>Sexo:</strong> {mascota.sexo} <br />
           <strong>Edad:</strong> {mascota.edad} <br />
-          <strong>Ubicación:</strong> {mascota.ubicacion}
+          <strong>Tamaño:</strong> {mascota.tamaño} <br />
+          <strong>Ubicación:</strong> {mascota.ubicacion} <br />
+          <strong>Estado de salud:</strong> {mascota.estadoSalud} <br />
+          <strong>Vacunas:</strong> {mascota.vacunas.join(", ")} <br />
+          <strong>Condiciones especiales:</strong> {mascota.condicionesEspeciales.join(", ")} <br />
+          <strong>Comportamiento:</strong> {mascota.comportamiento.join(", ")} <br />
+          <strong>Compatible con niños:</strong> {mascota.compatibilidad.ninos ? "Sí" : "No"} <br />
+          <strong>Compatible con otros perros:</strong> {mascota.compatibilidad.otrosPerros ? "Sí" : "No"} <br />
+          <strong>Compatible con gatos:</strong> {mascota.compatibilidad.gatos ? "Sí" : "No"}
         </p>
-        <p>{mascota.descripcion}</p>
 
-        {/* Fotos extra */}
+        <p style={{ whiteSpace: "pre-line" }}>{mascota.descripcion}</p>
+
+        {/* Fotos extras */}
         {fotos.length > 1 && (
           <div className="mt-3">
             <h4>📸 Más fotos</h4>
@@ -73,10 +78,7 @@ function MascotaDetalle() {
                     backgroundColor: "#f8f9fa",
                     borderRadius: "8px",
                     cursor: "pointer",
-                    border:
-                      idx === fotoIndex
-                        ? "3px solid #007bff"
-                        : "2px solid #ccc",
+                    border: idx === fotoIndex ? "3px solid #007bff" : "2px solid #ccc",
                   }}
                   onClick={() => {
                     setFotoIndex(idx);
@@ -119,12 +121,8 @@ function MascotaDetalle() {
 
         {/* Botones de acción */}
         <div className="d-flex gap-2 mt-3">
-          <Link to="/" className="btn btn-secondary">
-            Volver
-          </Link>
-          <Link to="/adoptar" className="btn btn-success">
-            ❤️ Adoptar
-          </Link>
+          <Link to="/" className="btn btn-secondary">Volver</Link>
+          <Link to="/adoptar" className="btn btn-success">❤️ Adoptar</Link>
         </div>
       </div>
 
@@ -132,55 +130,34 @@ function MascotaDetalle() {
       {mostrarModal && (
         <div
           className="modal fade show"
-          style={{
-            display: "block",
-            backgroundColor: "rgba(0,0,0,0.8)",
-          }}
+          style={{ display: "block", backgroundColor: "rgba(0,0,0,0.8)" }}
           onClick={() => setMostrarModal(false)}
         >
           <div
             className="d-flex justify-content-center align-items-center"
             style={{ height: "100vh", position: "relative" }}
           >
-            {/* Botón Anterior */}
             {fotos.length > 1 && (
               <button
                 className="btn btn-light"
-                style={{
-                  position: "absolute",
-                  left: "20px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
+                style={{ position: "absolute", left: "20px", top: "50%", transform: "translateY(-50%)" }}
                 onClick={anteriorFoto}
               >
                 ⬅
               </button>
             )}
 
-            {/* Imagen ampliada */}
             <img
               src={fotoSeleccionada}
               alt="Vista ampliada"
-              style={{
-                maxHeight: "90%",
-                maxWidth: "90%",
-                objectFit: "contain",
-                borderRadius: "10px",
-              }}
+              style={{ maxHeight: "90%", maxWidth: "90%", objectFit: "contain", borderRadius: "10px" }}
               onClick={(e) => e.stopPropagation()}
             />
 
-            {/* Botón Siguiente */}
             {fotos.length > 1 && (
               <button
                 className="btn btn-light"
-                style={{
-                  position: "absolute",
-                  right: "20px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                }}
+                style={{ position: "absolute", right: "20px", top: "50%", transform: "translateY(-50%)" }}
                 onClick={siguienteFoto}
               >
                 ➡

@@ -48,7 +48,8 @@ function MascotaDetalle() {
         {/* Información completa */}
         <div>
           {Object.entries(mascota).map(([key, value]) => {
-            if (["id", "fotoPortada", "fotosExtras"].includes(key)) return null;
+            if (["id", "fotoPortada", "fotosExtras", "videos"].includes(key))
+              return null;
 
             if (typeof value === "object" && value !== null) {
               if (Array.isArray(value)) {
@@ -69,17 +70,55 @@ function MascotaDetalle() {
           })}
         </div>
 
+        {/* Sección de videos */}
+        {mascota.videos && mascota.videos.length > 0 && (
+          <div className="mt-4">
+            <h4 className="text-center mb-3" style={{ color: "#6c5ce7" }}>
+              🎥 Videos de {mascota.nombre}
+            </h4>
+            <div className="row justify-content-center g-3">
+              {mascota.videos.map((video, index) => (
+                <div key={index} className="col-md-6 d-flex justify-content-center">
+                  {video.includes("youtube.com") || video.includes("youtu.be") ? (
+                    <iframe
+                      width="100%"
+                      height="315"
+                      src={
+                        video.includes("embed")
+                          ? video
+                          : video.replace("watch?v=", "embed/")
+                      }
+                      title={`Video ${index + 1}`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="rounded-4 shadow-sm"
+                    ></iframe>
+                  ) : (
+                    <video
+                      width="100%"
+                      height="315"
+                      controls
+                      className="rounded-4 shadow-sm"
+                    >
+                      <source src={video} type="video/mp4" />
+                      Tu navegador no soporta la reproducción de video.
+                    </video>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Botones */}
-        <div className="d-flex gap-2 mt-3">
+        <div className="d-flex gap-2 mt-4">
           <Link to="/" className="btn btn-secondary">
             Volver
           </Link>
 
-          {/* Adopción directa: enviando el ID como query param */}
-          <Link
-            to={`/adoptar?ids=${mascota.id}`}
-            className="btn btn-success"
-          >
+          {/* Adopción directa */}
+          <Link to={`/adoptar?ids=${mascota.id}`} className="btn btn-success">
             ❤️ Adoptar
           </Link>
 

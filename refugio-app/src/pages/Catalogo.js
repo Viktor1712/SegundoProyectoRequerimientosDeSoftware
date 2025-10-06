@@ -27,14 +27,16 @@ function Catalogo() {
   });
 
   return (
-    <div>
-      <h2 className="mb-3">🐾 Catálogo de Mascotas</h2>
+    <div className="container mt-4">
+      <h2 className="mb-4 text-center" style={{ color: "#6c5ce7" }}>
+        🐾 Catálogo de Mascotas
+      </h2>
 
       {/* Filtros */}
-      <div className="row mb-4">
+      <div className="row mb-4 g-2 justify-content-center">
         <div className="col-md-2">
           <select
-            className="form-select"
+            className="form-select shadow-sm"
             value={filtroEspecie}
             onChange={(e) => setFiltroEspecie(e.target.value)}
           >
@@ -50,7 +52,7 @@ function Catalogo() {
         <div className="col-md-2">
           <input
             type="text"
-            className="form-control"
+            className="form-control shadow-sm"
             placeholder="Raza"
             value={filtroRaza}
             onChange={(e) => setFiltroRaza(e.target.value)}
@@ -58,7 +60,7 @@ function Catalogo() {
         </div>
         <div className="col-md-2">
           <select
-            className="form-select"
+            className="form-select shadow-sm"
             value={filtroTamaño}
             onChange={(e) => setFiltroTamaño(e.target.value)}
           >
@@ -70,7 +72,7 @@ function Catalogo() {
         </div>
         <div className="col-md-2">
           <select
-            className="form-select"
+            className="form-select shadow-sm"
             value={filtroNiños}
             onChange={(e) => setFiltroNiños(e.target.value)}
           >
@@ -81,7 +83,7 @@ function Catalogo() {
         </div>
         <div className="col-md-2">
           <select
-            className="form-select"
+            className="form-select shadow-sm"
             value={filtroOtrosAnimales}
             onChange={(e) => setFiltroOtrosAnimales(e.target.value)}
           >
@@ -93,51 +95,61 @@ function Catalogo() {
       </div>
 
       {/* Cards */}
-      <div className="row">
-        {mascotasFiltradas.map((m) => (
-          <div key={m.id} className="col-md-4 mb-3 d-flex">
-            <div className="card w-100 h-100 d-flex flex-column">
-              {/* Imagen más grande */}
-              <img
-                src={m.fotoPortada}
-                className="card-img-top"
-                alt={m.nombre}
-                style={{ height: "400px", objectFit: "cover" }}
-              />
+      <div className="row g-4">
+        {mascotasFiltradas.length > 0 ? (
+          mascotasFiltradas.map((m) => (
+            <div key={m.id} className="col-md-4 d-flex">
+              <div className="card w-100 h-100 shadow-sm rounded-4">
+                <img
+                  src={m.fotoPortada}
+                  className="card-img-top rounded-top-4"
+                  alt={m.nombre}
+                  style={{ height: "300px", objectFit: "cover" }}
+                />
+                <div className="card-body d-flex flex-column">
+                  <h5 className="card-title">{m.nombre}</h5>
+                  <p className="card-text mb-2">
+                    <strong>Especie:</strong> {m.especie} <br />
+                    <strong>Raza:</strong> {m.raza} <br />
+                    <strong>Tamaño:</strong> {m.tamaño} <br />
+                    <strong>Ubicación:</strong> {m.ubicacion} <br />
+                  </p>
+                  <p
+                    className="card-text text-muted"
+                    style={{
+                      maxHeight: "60px",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      flexGrow: 1,
+                    }}
+                  >
+                    {m.descripcion}
+                  </p>
 
-              <div className="card-body d-flex flex-column">
-                <h5 className="card-title">{m.nombre}</h5>
-                <p className="card-text">
-                  <strong>Especie:</strong> {m.especie} <br />
-                  <strong>Raza:</strong> {m.raza} <br />
-                  <strong>Tamaño:</strong> {m.tamaño} <br />
-                  <strong>Ubicación:</strong> {m.ubicacion} <br />
-                </p>
-
-                <p
-                  className="card-text"
-                  style={{
-                    maxHeight: "60px",
-                    overflow: "hidden",
-                    textOverflow: "ellipsis",
-                    flexGrow: 1,
-                  }}
-                >
-                  {m.descripcion}
-                </p>
-
-                <Link
-                  to={`/mascota/${m.id}`}
-                  className="btn btn-primary mt-auto"
-                >
-                  Ver más
-                </Link>
+                  <Link
+                    to={`/mascota/${m.id}`}
+                    className="btn mt-2"
+                    style={{
+                      backgroundColor: "#6c5ce7",
+                      color: "white",
+                      border: "none",
+                      borderRadius: "8px",
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#5a4bcf")
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = "#6c5ce7")
+                    }
+                  >
+                    Ver más
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-        {mascotasFiltradas.length === 0 && (
-          <p>No se encontraron mascotas con esos filtros.</p>
+          ))
+        ) : (
+          <p className="text-center">No se encontraron mascotas con esos filtros.</p>
         )}
       </div>
     </div>
